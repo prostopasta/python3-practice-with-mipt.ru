@@ -39,11 +39,16 @@ def circle(n, r, solid=True):
 
 
 turtle.penup()
+turtle.forward(radius(3))
 for i in range(3, num + 3):
     n_angle = 90 - 180 / i
     n_radius = radius(i)
     n_side = side(i)
-    turtle.forward(radius(3) + (i - 3) * adjust)
+    turtle.penup()
+    turtle.setheading(0)
+#    turtle.forward(radius(3) + (i - 3) * adjust)
+    if i != 3:
+        turtle.forward(adjust)
     turtle.pendown()
     for j in range(i):
         if j == 0:
@@ -52,5 +57,3 @@ for i in range(3, num + 3):
             turtle.left(180 - 2 * n_angle)
         turtle.forward(n_side)
 #    circle(circle_edges, n_radius, False)  # рисовать описанную вокруг текущего многоугольника окружность
-    turtle.penup()
-    turtle.home()
