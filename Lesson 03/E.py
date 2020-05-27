@@ -32,17 +32,34 @@ a.sort(key=lambda x: len(x), reverse=True)      # ['###', '??', '@']
 студента, потом второго и так далее. Результаты в одну строку
 """
 x = int(input())        # кол-во студентов
-student_grades = [[]]
+student_grades = []
+student = []
+sum = 0
+num = 0
 
 while True:
     s = input()
     if s == "#":
+        student_grades.append([sum, sorted(student, reverse=True)])
         break
-    else:
-        n, g = map(int, s.split())
-        student_grades[n].append(g)
-    student_grades.sort(key=lambda a: (a, int()))
-#    student_grades.sort(key=lambda a: sum([a]))
-#    student_grades.sort(key=lambda a: [a])
 
-print(x, student_grades)
+    n, g = map(int, s.split())
+
+    if n != num:
+        student_grades.append([sum, sorted(student, reverse=True)])
+        num = n
+        student = []
+        sum = 0
+
+    student.append(g)  # student_grades.append([n, g])
+    sum += g
+
+
+student_grades.sort(key=lambda a: [a, list()], reverse=True)
+
+string = ""
+for s in range(len(student_grades)):
+    l = student_grades[s][1]
+    for t in range(len(l)):
+        string += str(l[t]) + ' '
+print(string)
