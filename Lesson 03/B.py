@@ -1,9 +1,9 @@
 x, p, y = map(float, input().split())
-sum = x
+deposit = x
 n = 0
 
-while sum < y:
-    sum += int(sum * p) / 100
+while deposit < y:
+    deposit += int(deposit * p) / 100
     n += 1
 
 print(n)
