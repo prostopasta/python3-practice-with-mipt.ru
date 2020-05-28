@@ -1,0 +1,1 @@
+Link to tasks - http://judge2.vdi.mipt.ru/cgi-bin/new-register?action=212&contest_id=730201
