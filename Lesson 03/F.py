@@ -1,43 +1,45 @@
-def recurs(array, tmplst):
+def recurs(n, array, previous, n_plus1=True):
     k = len(array)
-    print(k, array)
-    if k == 0:
-        lst = sorted(tmplst, key=lambda x: [x[0], tmplst])
-        print(lst)
-        return lst
-
-    for n in range(int(k / 2)):
-        number = array[n]
-        print(number, array)
-        array.remove(number)
-        if (number + 1) in array:
-            array.remove(number + 1)
-            recurs(array, tmplst.append([number, number + 1]))
-        elif (number + 3) in array:
-            array.remove(number + 3)
-            recurs(array, tmplst.append([number, number + 3]))
+    if k == 2:
+        check = array[1] - array[0]
+        if check == 1 or check == 3:
+            print("HORRA!")
+            return 1
         else:
-            array.append(number)
-            continue
+            print("OOOPS!")
+            return 0
+
+    if n in array:
+        if (n + 1 in array) and (n % 3 != 0):
+            array.remove(n)
+            array.remove(n + 1)
+            print(n, n+1, array, 'n+1')
+            return recurs(array[0], array, n)
+        elif (n + 3) in array:
+            array.remove(n)
+            array.remove(n + 3)
+            print(n, n+3, array, 'n+3')
+            return recurs(array[0], array, False)
+        else:
+            print(n, array, 'no')
+            array.insert(0, previous)
+            if n_plus1:
+                array.insert(1, previous+1)
+            else:
+                array.insert(1, previous+3)
+            return recurs(array[1], array, n_plus1)
+    else:
+        print(n, array, '0')
+        print("OOOPS!")
+        return 0
 
 
-listOfIndexes = list()
 num = int(input())      # size of chocolate = 3 x num, num % 2 == 0 !!!
+result = 0
 
-array1 = list(range(3, 3 * num + 1))
-print(array1)
 
-resultlist1 = [1, 2].append(recurs(array1, []))
-print(resultlist1)
-if resultlist1 not in listOfIndexes:
-    listOfIndexes.append(resultlist1)
+for i in range(3 * num - 1):
+    arr = list(range(1, 3 * num + 1))
+    result += recurs(i + 1, arr, 1)
 
-array2 = list(range(2, 4)) + list(range(5, 3 * num + 1))
-print(array2)
-
-resultlist2 = [1, 4].append(recurs(array2, []))
-print(resultlist2)
-if resultlist2 not in listOfIndexes:
-    listOfIndexes.append(resultlist2)
-
-print(len(listOfIndexes) - 1, listOfIndexes)
+print(result)
