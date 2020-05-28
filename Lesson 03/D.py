@@ -22,37 +22,18 @@ medi = 0    # среднее
 mod3 = 0    # cумма остатков от деления суммы троек на последнее число тройки (каждые 3 введеных числа образуют тройку)
 num = 0     # кол-во чисел в последовательности
 tmp = 0     # сумма троек
+finish = False
 
 while True:
-    try:
-        x = input()    # вводим натуральное 0<=N<=100 - набор чисел, заканчивающихся решеткой
-    except Exception:
-        exit(1)
+    x = input()    # вводим натуральное 0<=N<=100 - набор чисел, заканчивающихся решеткой
+    if str(x) == "#":
+        if (num != 0) and (num % 3 == 0):
+            finish = True
+        break
 
-    try:
-        if str(x) == "#":
-            if num % 3 == 0:
-                break
-            else:
-                continue
-    except TypeError:
-        continue
-    except ValueError:
-        continue
-    except Exception:
-        exit(1)
-
-    try:
-        x = int(x)
-    except TypeError:
-        continue
-    except ValueError:
-        continue
-    except Exception:
-        exit(1)
-
+    x = int(x)
     if (x <= 0) or (x > 100):
-        continue
+        break
 
     num += 1
     medi += x
@@ -69,8 +50,5 @@ while True:
     else:
         tmp += x
 
-if num == 0:
-    num = 1
-    mini = 0
-
-print(round(medi / num, 3), maxi, mini, mod3)
+if finish:
+    print(round(medi / num, 3), maxi, mini, mod3)

@@ -31,35 +31,38 @@ a.sort(key=lambda x: len(x), reverse=True)      # ['###', '??', '@']
 Вывести отсортированные результаты студентов в одну строку. Сначала печатаются результаты лучшего по сумме баллов
 студента, потом второго и так далее. Результаты в одну строку
 """
-x = int(input())        # кол-во студентов
+
+num = int(input())        # кол-во студентов
 student_grades = []
 student = []
-sum = 0
-num = 0
+for i in range(num):
+    student_grades.append([])
 
 while True:
     s = input()
     if s == "#":
-        student_grades.append([sum, sorted(student, reverse=True)])
         break
-
     n, g = map(int, s.split())
+    if (n + 1 > num) or (0 > g > 10):
+        continue
+    student_grades[n].append(g)
+#    print(n, student_grades[n])
 
-    if n != num:
-        student_grades.append([sum, sorted(student, reverse=True)])
-        num = n
-        student = []
-        sum = 0
+#print(num, student_grades)
 
-    student.append(g)  # student_grades.append([n, g])
-    sum += g
+for i in range(len(student_grades)):
+    total = sum(map(lambda x: int(x), student_grades[i]))
+    student_grades[i].sort(key=lambda x: [int(x), list()], reverse=True)
+    student_grades[i].insert(0, total)
+#    print(i, student_grades[i], total)
 
+student_grades.sort(key=lambda x: int(x[0]), reverse=True)
+#print(student_grades)
 
-student_grades.sort(key=lambda a: [a, list()], reverse=True)
+string = ''
+for i in range(len(student_grades)):
+    student = student_grades[i]
+    for j in range(len(student) - 1):
+        string += str(student[j + 1]) + ' '
 
-string = ""
-for s in range(len(student_grades)):
-    l = student_grades[s][1]
-    for t in range(len(l)):
-        string += str(l[t]) + ' '
 print(string)
