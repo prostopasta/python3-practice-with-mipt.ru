@@ -8,7 +8,8 @@
 
 - Контесты Judge2 - http://judge2.vdi.mipt.ru/cgi-bin/new-register?/
 
-## Новые курсы МФТИ (2018-2020):
+
+## Другие курсы МФТИ по Python (2015-2020):
 1) Курс "Алгоритмы и структуры данных" (2018-2020)
     - http://cs.mipt.ru/algo
     - https://github.com/mipt-cs/course-algo
@@ -18,8 +19,13 @@
     - https://github.com/tkhirianov/lections_2019
     - https://github.com/mipt-cs/course-practice
 
-3) Курс "Продвинутое программирование на Python" (2018-2019)
+3) Курс "Практика программирования на Python" (2015-???)
+    - http://cs.mipt.ru/python
+    - https://youtu.be/fgf57Sa5A-A
+
+4) Курс "Продвинутое программирование на Python" (2018-2019)
     - https://github.com/mipt-cs/course-advanced_python
+
 
 ##  Курсы Тимофея Хирьянова для "Фоксфорда":
 1) Курс "Информатика за пределами ЕГЭ (10-11 класс) 
