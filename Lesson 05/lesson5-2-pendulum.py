@@ -17,6 +17,8 @@ TIME_STEP = TIME / 100
 
 mountpoint = gr.Point(SIZE_X // 2, SIZE_Y // 2)       # Точка крепления нити маятника
 coordinates = gr.Point(mountpoint.x + AMPLITUDE, mountpoint.y)    # Начальное положение маятника
+velocity = gr.Point(2, 0)       #  Скорость
+acceleration = gr.Point(0, 0.1)     #  Равномерная сила тяжести
 
 
 # Обьекты создаются здесь ОДИН лишь раз
@@ -37,6 +39,18 @@ pendulum.setFill('blue')
 pendulum.draw(window)
 
 
+def add(point_1, point_2):
+    new_point = gr.Point(point_1.x + point_2.x,
+                         point_1.y + point_2.y)
+    return new_point
+
+
+def sub(point_1, point_2):
+    new_point = gr.Point(point_1.x - point_2.x,
+                         point_1.y - point_2.y)
+    return new_point
+
+
 def update_coordinates(_coordinates, _time):
     current_angle = ANGLE + _time * (G / LENGTH) ** 0.5
 #    if _time % math.pi < TIME_STEP:
@@ -46,6 +60,21 @@ def update_coordinates(_coordinates, _time):
 #        new_coordinates = gr.Point(mountpoint.x - AMPLITUDE * math.sin(current_angle),
 #                                   mountpoint.y - AMPLITUDE * math.cos(current_angle))
     return new_coordinates
+
+
+#def update_coordinates(_coordinate, _velocity):
+#    return add(_coordinate, _velocity)
+
+
+def update_velocity(_velocity, _acceleration):
+    return add(_velocity, _acceleration)
+
+
+def update_acceleration(_coordinate, _sun_coordinate):
+    G = 2500
+    diff = sub(_coordinate, _sun_coordinate)
+    distance_2 = (diff.x ** 2 + diff.y ** 2) ** (3/2)
+    return gr.Point(-diff.x * G/distance_2, -diff.y * G/distance_2)
 
 
 def draw_rope(_new_coordinates):
